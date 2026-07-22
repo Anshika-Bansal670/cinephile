@@ -5,73 +5,48 @@ interface HeroProps {
 }
 
 export default function Hero({ movie }: HeroProps) {
-    const backdrop = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
+  const backdrop = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
+
   return (
     <section
-  className="relative h-screen overflow-hidden bg-black"
-  style={{
-    backgroundImage: `url(${backdrop})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
->
+      className="relative h-screen bg-cover bg-center"
+      style={{
+        backgroundImage: `url(${backdrop})`,
+      }}
+    >
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/70" />
 
-      {/* Background Gradient */}
-    <div className="absolute inset-0 bg-black/70"></div>
-
-<div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent"></div>
+      {/* Left Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center">
+      <div className="relative z-10 flex h-full items-center">
+        <div className="max-w-3xl px-10">
+          <h1 className="text-6xl font-black md:text-8xl">
+            {movie.title}
+          </h1>
 
-        {/* Movie Title */}
-       <div className="max-w-3xl px-10">
+          <div className="mt-6 flex gap-8 text-lg">
+            <span>⭐ {movie.vote_average.toFixed(1)}</span>
+            <span>📅 {movie.release_date}</span>
+          </div>
 
-    <h1 className="text-6xl md:text-8xl font-black">
+          <p className="mt-8 text-xl leading-9 text-gray-200">
+            {movie.overview}
+          </p>
 
-        {movie.title}
+          <div className="mt-10 flex flex-col gap-5 sm:flex-row">
+            <button className="rounded-full bg-red-600 px-8 py-4 font-semibold transition hover:bg-red-700">
+              🍿 Browse Movies
+            </button>
 
-    </h1>
-
-    <div className="mt-6 flex gap-8 text-lg">
-
-        <span>
-            ⭐ {movie.vote_average.toFixed(1)}
-        </span>
-
-        <span>
-            📅 {movie.release_date}
-        </span>
-
-    </div>
-
-    <p className="mt-8 text-xl leading-9 text-gray-200">
-
-        {movie.overview}
-
-    </p>
-
-</div>
-
-        {/* Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row justify-center gap-5">
-
-          <button
-            className="bg-red-600 hover:bg-red-700 transition duration-300 px-8 py-4 rounded-full font-semibold"
-          >
-            🍿 Browse Movies
-          </button>
-
-          <button
-            className="border border-gray-500 hover:border-white transition duration-300 px-8 py-4 rounded-full font-semibold"
-          >
-            ▶ Watch Trailer
-          </button>
-
+            <button className="rounded-full border border-gray-400 px-8 py-4 font-semibold transition hover:border-white">
+              ▶ Watch Trailer
+            </button>
+          </div>
         </div>
-
       </div>
-
     </section>
   );
 }
